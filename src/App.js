@@ -126,11 +126,6 @@ const getSymbolsFromRoll = (roll) => {
   }
 
   // Near misses for excitement
-  if (roll <= 80) {
-    const others = ["💎", "🍊", "🍋"];
-    return ["🍒", "🍒", others[roll % 3]];
-  }
-
   if (roll <= 90) {
     const others = ["💎", "🍒", "🍊"];
     return ["🍋", "🍋", others[roll % 3]]; 
