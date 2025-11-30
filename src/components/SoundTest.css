@@ -1,0 +1,61 @@
+.sound-test {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.9);
+  border: 2px solid #00ffff;
+  border-radius: 10px;
+  padding: 15px;
+  z-index: 10000;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+}
+
+.sound-test-title {
+  color: #00ffff;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.sound-test-buttons {
+  display: flex;
+  gap: 16px;
+}
+
+.sound-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sound-group-title {
+  font-size: 11px;
+  font-weight: bold;
+  color: #ffd700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
+}
+
+.sound-test button {
+  background: linear-gradient(145deg, #1a1a2e, #0a0a1a);
+  color: #00ffff;
+  border: 2px solid #00ffff;
+  border-radius: 5px;
+  padding: 8px 15px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 12px;
+  transition: all 0.2s;
+}
+
+.sound-test button:hover {
+  background: linear-gradient(145deg, #2a2a3e, #1a1a2a);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
+  transform: scale(1.05);
+}
+
+.sound-test button:active {
+  transform: scale(0.95);
+}

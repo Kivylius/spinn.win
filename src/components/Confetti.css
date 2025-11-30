@@ -1,0 +1,187 @@
+/* Shimmer background */
+.win-flash {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9998;
+  background: 
+    linear-gradient(
+      45deg,
+      rgba(255, 215, 0, 0.1) 0%,
+      rgba(255, 0, 255, 0.15) 25%,
+      rgba(0, 255, 255, 0.15) 50%,
+      rgba(255, 0, 255, 0.15) 75%,
+      rgba(255, 215, 0, 0.1) 100%
+    );
+  background-size: 400% 400%;
+  animation: shimmerBackground 3s ease-in-out infinite;
+}
+
+@keyframes shimmerBackground {
+  0%, 100% {
+    background-position: 0% 50%;
+    opacity: 0.6;
+  }
+  50% {
+    background-position: 100% 50%;
+    opacity: 0.9;
+  }
+}
+
+/* Confetti */
+.confetti-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.confetti {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  top: -20px;
+  animation: confetti-fall 4s ease-out forwards;
+  border-radius: 2px;
+  will-change: transform, opacity;
+}
+
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) translateX(var(--drift, 0px)) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* Animated stars */
+.stars-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10000;
+}
+
+.star {
+  position: absolute;
+  animation: starPulse 2s ease-in-out infinite, starFloat 4s ease-in-out infinite;
+  filter: drop-shadow(0 0 10px #ffd700);
+  will-change: transform, opacity;
+}
+
+@keyframes starPulse {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.3) rotate(180deg);
+    opacity: 0.6;
+  }
+}
+
+@keyframes starFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-30px);
+  }
+}
+
+/* Sparkles */
+.sparkles-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10001;
+}
+
+.sparkle {
+  position: absolute;
+  font-size: 30px;
+  animation: sparkleShine 2.5s ease-in-out infinite;
+  filter: drop-shadow(0 0 5px #fff);
+  will-change: transform, opacity;
+}
+
+@keyframes sparkleShine {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(0) rotate(0deg);
+  }
+  40% {
+    opacity: 1;
+    transform: scale(1.2) rotate(90deg);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.2) rotate(180deg);
+  }
+}
+
+/* Big WIN text */
+.big-win-text {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: clamp(3rem, 10vw, 8rem);
+  font-weight: 900;
+  color: #ffd700;
+  text-shadow: 
+    0 0 20px #ffd700,
+    0 0 40px #ffd700,
+    0 0 60px #ff8800,
+    0 0 80px #ff8800,
+    5px 5px 10px rgba(0, 0, 0, 0.8);
+  pointer-events: none;
+  z-index: 10002;
+  animation: bigWinPulse 1.2s ease-in-out infinite, bigWinBounce 2s ease-in-out infinite;
+  letter-spacing: 10px;
+  will-change: transform;
+}
+
+@keyframes bigWinPulse {
+  0%, 100% {
+    text-shadow: 
+      0 0 20px #ffd700,
+      0 0 40px #ffd700,
+      0 0 60px #ff8800,
+      0 0 80px #ff8800,
+      5px 5px 10px rgba(0, 0, 0, 0.8);
+  }
+  50% {
+    text-shadow: 
+      0 0 35px #ffd700,
+      0 0 70px #ffd700,
+      0 0 100px #ff8800,
+      0 0 140px #ff8800,
+      5px 5px 10px rgba(0, 0, 0, 0.8);
+  }
+}
+
+@keyframes bigWinBounce {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.08);
+  }
+}

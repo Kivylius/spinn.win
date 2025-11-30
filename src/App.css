@@ -1,0 +1,660 @@
+body {
+  background:
+    radial-gradient(circle at 20% 50%, rgba(138, 43, 226, 0.15), transparent 50%),
+    radial-gradient(circle at 80% 50%, rgba(0, 100, 255, 0.15), transparent 50%),
+    linear-gradient(180deg, #000000 0%, #0a0a1a 50%, #000000 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Shimmer effect overlay - like a coin shining */
+.shimmer-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+/* First shimmer - top-left to bottom-right */
+.shimmer-overlay::before {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: -100%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(135deg,
+      transparent 0%,
+      transparent 20%,
+      rgba(138, 43, 226, 0.04) 35%,
+      rgba(255, 215, 0, 0.06) 42%,
+      rgba(255, 255, 255, 0.08) 50%,
+      rgba(255, 215, 0, 0.06) 58%,
+      rgba(0, 100, 255, 0.04) 65%,
+      transparent 80%,
+      transparent 100%);
+  animation: shimmerSweep1 30s ease-in-out infinite;
+}
+
+/* Second shimmer - bottom-right to top-left */
+.shimmer-overlay::after {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: -100%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(315deg,
+      transparent 0%,
+      transparent 20%,
+      rgba(0, 100, 255, 0.04) 35%,
+      rgba(255, 215, 0, 0.06) 42%,
+      rgba(255, 255, 255, 0.08) 50%,
+      rgba(255, 215, 0, 0.06) 58%,
+      rgba(138, 43, 226, 0.04) 65%,
+      transparent 80%,
+      transparent 100%);
+  animation: shimmerSweep2 30s ease-in-out infinite;
+}
+
+@keyframes shimmerSweep1 {
+
+  0%,
+  100% {
+    transform: translate(-50%, -50%);
+  }
+
+  50% {
+    transform: translate(50%, 50%);
+  }
+}
+
+@keyframes shimmerSweep2 {
+
+  0%,
+  100% {
+    transform: translate(50%, 50%);
+  }
+
+  50% {
+    transform: translate(-50%, -50%);
+  }
+}
+
+/* Dot stars background */
+.dot-stars {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.dot-star {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 0 2px rgba(255, 255, 255, 0.8);
+  animation: dotTwinkle 3s ease-in-out infinite;
+}
+
+@keyframes dotTwinkle {
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.3;
+  }
+
+  50% {
+    transform: scale(1.5);
+    opacity: 1;
+  }
+}
+
+/* Animated background stars */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    radial-gradient(2px 2px at 20% 30%, white, transparent),
+    radial-gradient(2px 2px at 60% 70%, white, transparent),
+    radial-gradient(1px 1px at 50% 50%, white, transparent),
+    radial-gradient(1px 1px at 80% 10%, white, transparent),
+    radial-gradient(2px 2px at 90% 60%, white, transparent),
+    radial-gradient(1px 1px at 33% 80%, white, transparent),
+    radial-gradient(1px 1px at 15% 90%, white, transparent);
+  background-size: 200% 200%;
+  background-position: 0% 0%;
+  animation: starsMove 60s linear infinite;
+  opacity: 0.6;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Twinkling stars */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    radial-gradient(1px 1px at 10% 20%, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(1px 1px at 40% 40%, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(1px 1px at 70% 60%, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(1px 1px at 25% 75%, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(1px 1px at 85% 85%, rgba(255, 255, 255, 0.8), transparent);
+  background-size: 300% 300%;
+  animation: starsTwinkle 3s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes starsMove {
+  0% {
+    background-position: 0% 0%;
+  }
+
+  100% {
+    background-position: 100% 100%;
+  }
+}
+
+@keyframes starsTwinkle {
+
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.container {
+  background:
+    linear-gradient(180deg, #0a0a2e 0%, #16213e 50%, #0a0a2e 100%),
+    repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 100, 255, 0.03) 2px, rgba(0, 100, 255, 0.03) 4px);
+  border-radius: 30px;
+  padding: 30px;
+  box-shadow:
+    0 0 100px rgba(0, 100, 255, 0.5),
+    0 0 200px rgba(138, 43, 226, 0.3),
+    0 20px 60px rgba(0, 0, 0, 0.8),
+    inset 0 0 100px rgba(0, 50, 150, 0.1);
+  position: relative;
+  max-width: 1000px;
+  margin: 0 auto;
+  border: 2px solid rgba(0, 100, 255, 0.3);
+  z-index: 1;
+}
+
+/* Desktop only: center vertically */
+@media (min-width: 1024px) {
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+  }
+
+  .container {
+    margin: 20px auto;
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+h1 {
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  margin: 0;
+  background: linear-gradient(45deg, #ff00ff, #00ffff, #ff00ff);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: titleShine 3s linear infinite;
+  filter: drop-shadow(0 0 20px rgba(255, 0, 255, 0.6));
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+
+@keyframes titleShine {
+  0% {
+    background-position: 0% center;
+  }
+
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 25px;
+}
+
+.info-item {
+  background: #000;
+  border: 4px solid #ffd700;
+  border-radius: 12px;
+  padding: 15px 20px;
+  text-align: center;
+  box-shadow:
+    0 0 25px rgba(255, 215, 0, 0.5),
+    inset 0 0 20px rgba(255, 215, 0, 0.2);
+  position: relative;
+}
+
+.info-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, rgba(255, 215, 0, 0.1), transparent);
+  pointer-events: none;
+  border-radius: 8px;
+}
+
+.info-label {
+  font-size: clamp(0.8rem, 2vw, 1rem);
+  color: #ffd700;
+  font-weight: bold;
+  margin-bottom: 6px;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+  letter-spacing: 2px;
+}
+
+.info-value {
+  font-size: clamp(1.1rem, 3vw, 1.6rem);
+  color: #ffd700;
+  font-weight: bold;
+  font-family: 'Courier New', monospace;
+  text-shadow: 0 0 15px #ffd700, 0 0 30px #ffd700;
+  animation: infoGlow 2s ease-in-out infinite;
+}
+
+@keyframes infoGlow {
+
+  0%,
+  100% {
+    text-shadow: 0 0 15px #ffd700, 0 0 30px #ffd700;
+  }
+
+  50% {
+    text-shadow: 0 0 20px #ffd700, 0 0 40px #ffd700;
+  }
+}
+
+@media (max-width: 600px) {
+  .info {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+}
+
+.game {
+  text-align: center;
+}
+
+/* Result display removed - now shown in slot machine */
+
+.rules {
+  background: linear-gradient(145deg, rgba(0, 0, 0, 0.95), rgba(10, 10, 30, 0.95));
+  padding: 25px 30px;
+  border-radius: 20px;
+  margin-top: 30px;
+  border: 3px solid rgba(255, 215, 0, 0.4);
+  box-shadow:
+    0 0 30px rgba(255, 215, 0, 0.2),
+    inset 0 0 30px rgba(255, 215, 0, 0.05);
+}
+
+.rules h3 {
+  margin: 0 0 20px 0;
+  font-size: clamp(1.4rem, 3.5vw, 1.8rem);
+  color: #ffd700;
+  text-align: center;
+  text-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.rules ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.rules li {
+  padding: 18px 25px;
+  font-size: clamp(1.2rem, 3vw, 1.6rem);
+  background: linear-gradient(145deg, rgba(0, 0, 0, 0.8), rgba(20, 20, 40, 0.8));
+  border-radius: 12px;
+  border: 3px solid rgba(255, 215, 0, 0.3);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  box-shadow:
+    0 0 15px rgba(255, 215, 0, 0.2),
+    inset 0 0 20px rgba(255, 215, 0, 0.05);
+  transition: all 0.3s;
+  position: relative;
+}
+
+.rules li.jackpot-item {
+  border-color: rgba(255, 215, 0, 0.6);
+  background: linear-gradient(145deg, rgba(255, 215, 0, 0.1), rgba(255, 100, 0, 0.05));
+}
+
+.jackpot-badge {
+  position: absolute;
+  top: -8px;
+  right: 10px;
+  background: linear-gradient(135deg, #ffd700, #ff8800);
+  color: #000;
+  font-size: clamp(0.6rem, 1.5vw, 0.75rem);
+  font-weight: 900;
+  padding: 3px 10px;
+  border-radius: 12px;
+  letter-spacing: 1px;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+  animation: jackpotPulse 2s ease-in-out infinite;
+}
+
+@keyframes jackpotPulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+  }
+
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(255, 215, 0, 1);
+  }
+}
+
+.rules li:hover {
+  border-color: rgba(255, 215, 0, 0.6);
+  transform: translateY(-2px);
+  box-shadow:
+    0 0 25px rgba(255, 215, 0, 0.4),
+    inset 0 0 30px rgba(255, 215, 0, 0.1);
+}
+
+.rules li .emoji-with-chance {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.rules li .emoji {
+  font-size: clamp(2rem, 5vw, 3rem);
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+}
+
+.rules li .chance {
+  color: #00ffff;
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+  min-width: 50px;
+}
+
+.rules li .payout {
+  color: #ffd700;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+  font-size: clamp(1.3rem, 3.2vw, 1.8rem);
+  font-weight: 800;
+}
+
+.rules li:last-child {
+  grid-column: 1 / -1;
+  color: #ffd700;
+  text-align: center;
+  border: 3px solid rgba(255, 215, 0, 0.5);
+  background: linear-gradient(145deg, rgba(255, 215, 0, 0.15), rgba(255, 215, 0, 0.05));
+  justify-content: center;
+  margin-top: 10px;
+  font-size: clamp(1.1rem, 2.8vw, 1.4rem);
+}
+
+@media (max-width: 600px) {
+  .rules ul {
+    grid-template-columns: 1fr;
+  }
+}
+
+.header-controls {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.music-toggle {
+  background: linear-gradient(145deg, #1a1a2e, #0a0a1a);
+  color: #00ffff;
+  border: 2px solid #00ffff;
+  border-radius: 8px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 14px;
+  transition: all 0.3s;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+}
+
+.music-toggle:hover {
+  background: linear-gradient(145deg, #2a2a3e, #1a1a2a);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+  transform: scale(1.05);
+}
+
+.music-toggle:active {
+  transform: scale(0.95);
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 15px;
+  margin-top: 30px;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 12px;
+  border-top: 1px solid rgba(0, 255, 255, 0.2);
+}
+
+.footer a {
+  color: #00ffff;
+  text-decoration: none;
+  font-family: monospace;
+  transition: color 0.3s;
+}
+
+.footer a:hover {
+  color: #ffffff;
+}
+
+.fund-link {
+  background: none;
+  border: none;
+  color: #ffd700;
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 12px;
+  padding: 0;
+  transition: color 0.3s;
+}
+
+.fund-link:hover {
+  color: #ffffff;
+}
+
+/* Floating Investor Button */
+.floating-investor-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ffd700 0%, #ffed4e 50%, #ffd700 100%);
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  box-shadow:
+    0 4px 20px rgba(255, 215, 0, 0.5),
+    0 0 40px rgba(255, 215, 0, 0.3),
+    inset 0 2px 10px rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  animation: floatPulse 3s ease-in-out infinite;
+}
+
+.floating-investor-btn:hover {
+  transform: scale(1.1) translateY(-5px);
+  box-shadow:
+    0 6px 30px rgba(255, 215, 0, 0.7),
+    0 0 60px rgba(255, 215, 0, 0.5),
+    inset 0 2px 10px rgba(255, 255, 255, 0.5);
+}
+
+.floating-investor-btn:active {
+  transform: scale(1.05) translateY(-3px);
+}
+
+@keyframes floatPulse {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+    box-shadow:
+      0 4px 20px rgba(255, 215, 0, 0.5),
+      0 0 40px rgba(255, 215, 0, 0.3),
+      inset 0 2px 10px rgba(255, 255, 255, 0.3);
+  }
+
+  50% {
+    transform: translateY(-10px);
+    box-shadow:
+      0 8px 30px rgba(255, 215, 0, 0.7),
+      0 0 60px rgba(255, 215, 0, 0.5),
+      inset 0 2px 10px rgba(255, 255, 255, 0.4);
+  }
+}
+
+/* Tooltip for floating button */
+.floating-investor-btn::before {
+  content: 'Invest in Casino';
+  position: absolute;
+  right: 80px;
+  background: rgba(0, 0, 0, 0.9);
+  color: #ffd700;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: 'Courier New', monospace;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.floating-investor-btn:hover::before {
+  opacity: 1;
+}
+
+/* Floating Music Button */
+.floating-music-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 110px;
+  /* Position to the left of invest button */
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #00ffff 0%, #00cccc 50%, #00ffff 100%);
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  box-shadow:
+    0 4px 20px rgba(0, 255, 255, 0.5),
+    0 0 40px rgba(0, 255, 255, 0.3),
+    inset 0 2px 10px rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  animation: floatPulse 3s ease-in-out infinite;
+  animation-delay: 0.5s;
+}
+
+.floating-music-btn:hover {
+  transform: scale(1.1) translateY(-5px);
+  box-shadow:
+    0 6px 30px rgba(0, 255, 255, 0.7),
+    0 0 60px rgba(0, 255, 255, 0.5),
+    inset 0 2px 10px rgba(255, 255, 255, 0.5);
+}
+
+.floating-music-btn:active {
+  transform: scale(1.05) translateY(-3px);
+}
+
+/* Tooltip for music button */
+.floating-music-btn::before {
+  content: attr(title);
+  position: absolute;
+  right: 70px;
+  background: rgba(0, 0, 0, 0.9);
+  color: #00ffff;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: 'Courier New', monospace;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  border: 1px solid rgba(0, 255, 255, 0.3);
+}
+
+.floating-music-btn:hover::before {
+  opacity: 1;
+}

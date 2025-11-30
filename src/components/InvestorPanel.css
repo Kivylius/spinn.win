@@ -1,0 +1,242 @@
+.investor-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: linear-gradient(145deg, #ffd700, #ffed4e);
+  color: #000;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  z-index: 1000;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+  transition: all 0.3s;
+}
+
+.investor-toggle:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
+}
+
+.investor-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  animation: fadeIn 0.3s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.investor-content {
+  background: linear-gradient(145deg, #1a1a2e, #0a0a1a);
+  border: 3px solid #ffd700;
+  border-radius: 20px;
+  padding: 30px;
+  max-width: 600px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 0 50px rgba(255, 215, 0, 0.5);
+  position: relative;
+  animation: slideIn 0.3s;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid #00ffff;
+  color: #00ffff;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.close-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: rotate(90deg);
+}
+
+.investor-content h2 {
+  color: #ffd700;
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 25px;
+  font-size: 28px;
+}
+
+.investor-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.stat-card {
+  background: rgba(0, 0, 0, 0.4);
+  border: 2px solid #00ffff;
+  border-radius: 10px;
+  padding: 15px;
+  text-align: center;
+}
+
+.stat-card.profit {
+  border-color: #00ff00;
+}
+
+.stat-label {
+  color: #00ffff;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.stat-value {
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.investor-info {
+  background: rgba(0, 255, 255, 0.1);
+  border: 1px solid #00ffff;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 25px;
+}
+
+.investor-info p {
+  color: #00ffff;
+  margin: 8px 0;
+  font-size: 14px;
+}
+
+.investor-info strong {
+  color: #ffd700;
+}
+
+.investor-actions {
+  display: flex;
+  gap: 15px;
+}
+
+.invest-btn,
+.withdraw-btn {
+  flex: 1;
+  padding: 15px;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.invest-btn {
+  background: linear-gradient(145deg, #00ff00, #00cc00);
+  color: #000;
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+}
+
+.invest-btn:hover:not(:disabled) {
+  transform: scale(1.05);
+  box-shadow: 0 0 30px rgba(0, 255, 0, 0.8);
+}
+
+.withdraw-btn {
+  background: linear-gradient(145deg, #ffd700, #ffed4e);
+  color: #000;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+}
+
+.withdraw-btn:hover:not(:disabled) {
+  transform: scale(1.05);
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
+}
+
+.invest-btn:disabled,
+.withdraw-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.invest-btn:active:not(:disabled),
+.withdraw-btn:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+.investor-list {
+  margin: 25px 0;
+  background: rgba(0, 0, 0, 0.4);
+  border: 2px solid #00ffff;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.investor-list h3 {
+  color: #ffd700;
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+.investor-table {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.investor-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 15px;
+  border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+  color: #fff;
+  font-size: 14px;
+}
+
+.investor-row:last-child {
+  border-bottom: none;
+}
+
+.investor-address {
+  color: #00ffff;
+}
+
+.investor-ownership {
+  color: #ffd700;
+  font-weight: bold;
+}

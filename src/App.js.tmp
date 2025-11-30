@@ -1,0 +1,106 @@
+import React, { useMemo, useState, useCallback, useEffect } from "react";
+import SlotMachine from "./components/SlotMachine";
+import Confetti from "./components/Confetti";
+import Controls from "./components/Controls";
+
+import { playJackpotSound } from "./jackpotSound";
+import { playSpinSound, stopSpinSound, playReelStopSound } from "./spinSounds";
+import {
+  startBackgroundMusic,
+  stopBackgroundMusic,
+  isMusicActive,
+} from "./backgroundMusic";
+import {
+  ConnectionProvider,
+  WalletProvider,
+  useConnection,
+  useWallet,
+} from "@solana/wallet-adapter-react";
+import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
+import {
+  PhantomWalletAdapter,
+  SolflareWalletAdapter,
+} from "@solana/wallet-adapter-wallets";
+import {
+  WalletModalProvider,
+  WalletMultiButton,
+} from "@solana/wallet-adapter-react-ui";
+import {
+  clusterApiUrl,
+  Connection,
+  PublicKey,
+  Transaction,
+  SystemProgram,
+  TransactionInstruction,
+} from "@solana/web3.js";
+import { serialize } from "borsh";
+import "./App.css";
+
+require("@solana/wallet-adapter-react-ui/styles.css");
+
+const playWinSound = () => {
+  const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+  // Ascending 8-bit beeps
+  const notes = [523.25, 659.25, 783.99, 1046.5]; // C, E, G, C
+  notes.forEach((freq, i) => {
+    const osc = audioContext.createOscillator();
+    const gain = audioContext.createGain();
+    osc.connect(gain);
+    gain.connect(audioContext.destination);
+    osc.frequency.value = freq;
+    osc.type = "square"; // 8-bit sound
+    const startTime = audioContext.currentTime + i * 0.08;
+    gain.gain.setValueAtTime(0.15, startTime);
+    gain.gain.exponentialRampToValueAtTime(0.01, startTime + 0.1);
+    osc.start(startTime);
+    osc.stop(startTime + 0.1);
+  });
+
+  // Coin dropping sounds - harmonious notes
+  const coinNotes = [1046.5, 1174.7, 1318.5, 1046.5, 1174.7, 1318.5]; // C, D, E repeating
+  coinNotes.forEach((freq, i) => {
+    const coinOsc = audioContext.createOscillator();
+    const coinGain = audioContext.createGain();
+    coinOsc.connect(coinGain);
+    coinGain.connect(audioContext.destination);
+
+    coinOsc.type = "sine";
+    coinOsc.frequency.value = freq;
+
+    const startTime = audioContext.currentTime + 0.25 + i * 0.12;
+    coinGain.gain.setValueAtTime(0.1, startTime);
+    coinGain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.15);
+
+    coinOsc.start(startTime);
+    coinOsc.stop(startTime + 0.15);
+  });
+};
+
+const playLoseSound = () => {
+  const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+  const oscillator = audioContext.createOscillator();
+  const gainNode = audioContext.createGain();
+  oscillator.connect(gainNode);
+  gainNode.connect(audioContext.destination);
+  oscillator.frequency.setValueAtTime(400, audioContext.currentTime);
+  oscillator.frequency.exponentialRampToValueAtTime(
+    100,
+    audioContext.currentTime + 0.4
+  );
+  oscillator.type = "sawtooth";
+  gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+  gainNode.gain.exponentialRampToValueAtTime(
+    0.005,
+    audioContext.currentTime + 0.4
+  );
+  oscillator.start(audioContext.currentTime);
+  oscillator.stop(audioContext.currentTime + 0.4);
+};
+
+const PROGRAM_ID = new PublicKey(
+  "AViToXHZzUwMMhbddep599auq5ATZhE59Hz3n5dcE1iZ"
+);
+const BANKROLL_SEED = "bankroll";
+
+// Map roll to slot symbols
